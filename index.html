@@ -3,33 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoddessR15 | Roblox VFX Portfolio</title>
+    <title>GoddessR15 | Ultimate Roblox VFX Portfolio</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Anime/Gaming Vibe -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Rajdhani', sans-serif; background-color: #05070b; color: #f3f4f6; }
+        body { font-family: 'Rajdhani', sans-serif; background-color: #030508; color: #f3f4f6; overflow-x: hidden; }
         .font-gaming { font-family: 'Orbitron', sans-serif; }
-        .anime-glow { box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); }
-        .card-glass { background: rgba(13, 19, 32, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 215, 0, 0.15); }
+        .anime-glow-gold { box-shadow: 0 0 35px rgba(255, 215, 0, 0.25); }
+        .anime-glow-green { box-shadow: 0 0 35px rgba(0, 255, 120, 0.25); }
+        .anime-glow-red { box-shadow: 0 0 35px rgba(255, 60, 60, 0.25); }
+        .anime-glow-blue { box-shadow: 0 0 35px rgba(59, 130, 246, 0.25); }
+        .card-glass { background: rgba(10, 15, 25, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.2); }
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s ease-in-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content.active { display: block; animation: animeFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes animeFade { from { opacity: 0; transform: translateY(15px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        
+        /* Interactive Canvas Particle Animation */
+        #vfxCanvas { background: radial-gradient(circle at center, #0f172a 0%, #030508 100%); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-yellow-500 selection:text-black">
+<body class="min-h-screen flex flex-col selection:bg-yellow-400 selection:text-black">
 
-    <!-- NAV BAR -->
-    <nav class="sticky top-0 z-50 bg-[#05070b]/90 backdrop-blur-md border-b border-yellow-500/20 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-3 h-3 bg-yellow-400 rounded-full animate-ping"></div>
-                <span class="font-gaming font-black text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-500">GODDESS_R15</span>
+    <!-- ANIME NAVIGATION BAR -->
+    <nav class="sticky top-0 z-50 bg-[#030508]/90 backdrop-blur-md border-b border-yellow-500/20 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-3.5 h-3.5 bg-yellow-400 rounded-full animate-ping"></div>
+                <span class="font-gaming font-black text-xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500">GODDESS_R15</span>
             </div>
-            <!-- Navigation Tabs -->
-            <div class="hidden md:flex space-x-2 font-gaming text-sm">
+            <!-- Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 font-gaming text-xs">
                 <button onclick="switchTab('home')" id="btn-home" class="nav-btn px-4 py-2 rounded-lg transition text-yellow-400 bg-yellow-500/10 border border-yellow-500/30">HOME</button>
-                <button onclick="switchTab('works')" id="btn-works" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">AURA WORKS</button>
-                <button onclick="switchTab('showcase')" id="btn-showcase" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">VFX LAB</button>
+                <button onclick="switchTab('works')" id="btn-works" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">AURAS</button>
+                <button onclick="switchTab('showcase')" id="btn-showcase" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">VFX PLAYER</button>
                 <button onclick="switchTab('contact')" id="btn-contact" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">CONTACT</button>
             </div>
             <a href="https://discord.com/users/aadi__22" target="_blank" class="px-4 py-2 bg-indigo-600/20 border border-indigo-500/40 text-indigo-300 font-gaming text-xs rounded-lg hover:bg-indigo-600/30 transition">DISCORD: aadi__22</a>
@@ -38,101 +46,112 @@
 
     <!-- TAB 1: HOME -->
     <div id="home" class="tab-content active flex-grow">
-        <header class="relative text-center py-28 px-4 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-gray-950 to-black border-b border-yellow-500/10">
-            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffd700_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        <header class="relative text-center py-32 px-4 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-gray-950 to-[#030508] border-b border-yellow-500/10">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffd700_1.5px,transparent_1.5px)] [background-size:24px_24px]"></div>
             <div class="relative z-10 max-w-4xl mx-auto">
-                <span class="px-4 py-1.5 text-xs font-gaming tracking-widest text-yellow-400 bg-yellow-500/10 border border-yellow-500/30 rounded-full uppercase">Roblox VFX Developer & Rig Specialist</span>
+                <span class="px-4 py-1.5 text-xs font-gaming tracking-widest text-yellow-400 bg-yellow-500/10 border border-yellow-500/30 rounded-full uppercase">Roblox Studio VFX Script Developer</span>
                 <h1 class="text-5xl md:text-8xl font-black font-gaming mt-6 tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-amber-600">
-                    DIVINE AURA VFX
+                    DIVINE R15 AURAS
                 </h1>
                 <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-2xl mx-auto font-medium">
-                    Mastering high-end particle systems, volumetric smoke auras, and combat VFX for R15 rigs in Roblox Studio.
+                    High-performance particle systems, volumetric smoke, and anime-styled combat auras built for Roblox developers.
                 </p>
-                <div class="mt-8 flex justify-center gap-4">
-                    <button onclick="switchTab('works')" class="px-8 py-3.5 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg anime-glow hover:scale-105 transition">EXPLORE AURA PACK</button>
+                <div class="mt-8 flex flex-wrap justify-center gap-4">
+                    <button onclick="switchTab('showcase')" class="px-8 py-3.5 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg anime-glow-gold hover:scale-105 transition">TEST LIVE VFX PLAYER</button>
                     <button onclick="switchTab('contact')" class="px-8 py-3.5 bg-gray-900 text-yellow-400 border border-yellow-500/40 font-gaming font-bold rounded-lg hover:bg-gray-800 transition">HIRE ME</button>
                 </div>
             </div>
         </header>
     </div>
 
-    <!-- TAB 2: AURA WORKS -->
+    <!-- TAB 2: AURAS CATALOGUE -->
     <div id="works" class="tab-content flex-grow max-w-6xl mx-auto py-16 px-6 w-full">
-        <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">ROBLOX R15 AURA COLLECTION</h2>
-        <p class="text-gray-400 mb-10">Tested and optimized in Roblox Studio using Luau script automation.</p>
+        <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">R15 GODDESS AURA PACK</h2>
+        <p class="text-gray-400 mb-10">Clean script-injected particle bundles optimized for R15 rigs in Roblox Studio workspace.</p>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Card 1 -->
-            <div class="card-glass rounded-xl p-6 hover:border-yellow-400 transition group">
+            <!-- Golden Card -->
+            <div class="card-glass rounded-xl p-6 hover:border-yellow-400 transition group anime-glow-gold">
                 <div class="h-44 bg-gradient-to-br from-yellow-950/60 to-black rounded-lg flex items-center justify-center border border-yellow-500/20 mb-4 group-hover:scale-[1.02] transition">
                     <span class="font-gaming text-yellow-300 text-lg font-bold">☀️ Golden Goddess</span>
                 </div>
                 <h3 class="text-xl font-bold font-gaming text-white">Solar Goddess R15</h3>
                 <p class="text-gray-400 text-sm mt-2">Volumetric gold smoke, radiant eye bursts, lightning arcs, and glowing outline highlights.</p>
-                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-yellow-500/10 text-yellow-300 rounded border border-yellow-500/20 font-gaming">Active Script Ready</span>
+                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-yellow-500/10 text-yellow-300 rounded border border-yellow-500/20 font-gaming">Script Ready</span>
             </div>
 
-            <!-- Card 2 -->
-            <div class="card-glass rounded-xl p-6 hover:border-emerald-400 transition group">
+            <!-- Emerald Card -->
+            <div class="card-glass rounded-xl p-6 hover:border-emerald-400 transition group anime-glow-green">
                 <div class="h-44 bg-gradient-to-br from-emerald-950/60 to-black rounded-lg flex items-center justify-center border border-emerald-500/20 mb-4 group-hover:scale-[1.02] transition">
                     <span class="font-gaming text-emerald-300 text-lg font-bold">🌿 Emerald Nature</span>
                 </div>
                 <h3 class="text-xl font-bold font-gaming text-white">Deity Emerald Aura</h3>
                 <p class="text-gray-400 text-sm mt-2">Jade green aura smoke, orbiting speed slashes, stardust embers, and emerald highlights.</p>
-                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-emerald-500/10 text-emerald-300 rounded border border-emerald-500/20 font-gaming">Active Script Ready</span>
+                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-emerald-500/10 text-emerald-300 rounded border border-emerald-500/20 font-gaming">Script Ready</span>
             </div>
 
-            <!-- Card 3 -->
-            <div class="card-glass rounded-xl p-6 hover:border-red-400 transition group">
+            <!-- Red Card -->
+            <div class="card-glass rounded-xl p-6 hover:border-red-400 transition group anime-glow-red">
                 <div class="h-44 bg-gradient-to-br from-red-950/60 to-black rounded-lg flex items-center justify-center border border-red-500/20 mb-4 group-hover:scale-[1.02] transition">
                     <span class="font-gaming text-red-400 text-lg font-bold">🔥 Solar Crimson</span>
                 </div>
                 <h3 class="text-xl font-bold font-gaming text-white">R15 Pure Crimson</h3>
                 <p class="text-gray-400 text-sm mt-2">Intense high-velocity red flame emission, eye glints, and heat distortion waves.</p>
-                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-red-500/10 text-red-300 rounded border border-red-500/20 font-gaming">Active Script Ready</span>
+                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-red-500/10 text-red-300 rounded border border-red-500/20 font-gaming">Script Ready</span>
             </div>
         </div>
     </div>
 
-    <!-- TAB 3: VFX LAB -->
-    <div id="showcase" class="tab-content flex-grow max-w-6xl mx-auto py-16 px-6 w-full">
-        <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">VFX LAB & CAPABILITIES</h2>
-        <p class="text-gray-400 mb-10">Technical overview of Roblox Studio systems built for high-performance games.</p>
+    <!-- TAB 3: INTERACTIVE VFX ANIMATION PLAYER -->
+    <div id="showcase" class="tab-content flex-grow max-w-5xl mx-auto py-16 px-6 w-full">
+        <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">LIVE VFX AURA PLAYER</h2>
+        <p class="text-gray-400 mb-8">Test the particle emission live with custom anime theme colors and animation controls.</p>
         
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="card-glass p-6 rounded-xl border border-yellow-500/20">
-                <h3 class="text-lg font-bold font-gaming text-yellow-300 mb-2">⚡ Script Automation</h3>
-                <p class="text-gray-400 text-sm">Command bar and server script injection supporting automatic target rig detection (`Goddess R15`), clean garbage collection of old attachments, and zero lag.</p>
+        <div class="card-glass p-6 rounded-2xl border border-yellow-500/30 flex flex-col items-center">
+            <!-- Canvas Display -->
+            <div class="relative w-full h-80 rounded-xl overflow-hidden border border-yellow-500/20 mb-6 flex items-center justify-center">
+                <canvas id="vfxCanvas" class="w-full h-full absolute inset-0"></canvas>
+                <div id="auraStatus" class="absolute top-4 left-4 px-3 py-1 bg-black/70 border border-yellow-500/40 text-yellow-400 font-gaming text-xs rounded-full">
+                    STATUS: ACTIVE (GOLDEN GODDESS)
+                </div>
             </div>
-            <div class="card-glass p-6 rounded-xl border border-yellow-500/20">
-                <h3 class="text-lg font-bold font-gaming text-yellow-300 mb-2">✨ Particle Layers</h3>
-                <p class="text-gray-400 text-sm">Multi-layered particle stacks combining volumetric smoke clouds, rotating fire textures, spark flickers, and custom star glints.</p>
+
+            <!-- Controls (Play / Stop / Color Switchers) -->
+            <div class="flex flex-wrap justify-center items-center gap-4 w-full">
+                <button onclick="setAuraTheme('gold', '#ffd700')" class="px-4 py-2 bg-yellow-500/20 border border-yellow-400 text-yellow-300 font-gaming text-xs rounded-lg hover:bg-yellow-500/30 transition">☀️ Gold</button>
+                <button onclick="setAuraTheme('green', '#00ff78')" class="px-4 py-2 bg-emerald-500/20 border border-emerald-400 text-emerald-300 font-gaming text-xs rounded-lg hover:bg-emerald-500/30 transition">🌿 Emerald</button>
+                <button onclick="setAuraTheme('red', '#ff3c3c')" class="px-4 py-2 bg-red-500/20 border border-red-400 text-red-300 font-gaming text-xs rounded-lg hover:bg-red-500/30 transition">🔥 Crimson</button>
+                <button onclick="setAuraTheme('blue', '#3b82f6')" class="px-4 py-2 bg-blue-500/20 border border-blue-400 text-blue-300 font-gaming text-xs rounded-lg hover:bg-blue-500/30 transition">⚡ Azure</button>
+                
+                <div class="h-6 w-[1px] bg-gray-700 hidden sm:block"></div>
+
+                <button onclick="playVfx()" class="px-6 py-2.5 bg-green-500 text-black font-gaming font-bold text-xs rounded-lg hover:bg-green-400 transition shadow-lg shadow-green-500/20">▶ PLAY</button>
+                <button onclick="stopVfx()" class="px-6 py-2.5 bg-red-500 text-white font-gaming font-bold text-xs rounded-lg hover:bg-red-400 transition shadow-lg shadow-red-500/20">⏹ STOP</button>
             </div>
         </div>
     </div>
 
-    <!-- TAB 4: CONTACT (WORKS WITH YOUR GMAIL) -->
+    <!-- TAB 4: CONTACT & EMAIL BACKEND -->
     <div id="contact" class="tab-content flex-grow max-w-4xl mx-auto py-16 px-6 w-full">
         <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">GET IN TOUCH</h2>
-        <p class="text-gray-400 mb-8">Send a commission request or project inquiry directly to my inbox.</p>
+        <p class="text-gray-400 mb-8">Send a commission inquiry or custom VFX request directly to my Gmail inbox.</p>
         
         <div class="grid md:grid-cols-2 gap-8">
             <div class="card-glass p-8 rounded-xl border border-yellow-500/20 flex flex-col justify-between">
                 <div>
-                    <h3 class="text-xl font-bold font-gaming text-white mb-4">Direct Contacts</h3>
+                    <h3 class="text-xl font-bold font-gaming text-white mb-4">Direct Details</h3>
                     <p class="text-gray-300 text-sm mb-3">📧 Gmail: <strong class="text-yellow-400">adityabiranjan37@gmail.com</strong></p>
                     <p class="text-gray-300 text-sm mb-6">💬 Discord: <strong class="text-yellow-400">aadi__22</strong></p>
                 </div>
-                <div class="p-4 bg-yellow-500/5 rounded-lg border border-yellow-500/20 text-xs text-yellow-300">
-                    ⚡ Fast response within 24 hours on Discord or email.
+                <div class="p-4 bg-yellow-500/5 rounded-lg border border-yellow-500/20 text-xs text-yellow-300 font-medium">
+                    ⚡ Form messages deliver straight to adityabiranjan37@gmail.com instantly.
                 </div>
             </div>
 
-            <!-- Working Contact Form (Sends to your Gmail via Web3Forms) -->
+            <!-- Working Contact Form -->
             <form action="https://api.web3forms.com/submit" method="POST" class="card-glass p-8 rounded-xl border border-yellow-500/20 space-y-4">
-                <!-- Replace with your free access key from web3forms.com -->
-                <input type="hidden" name="53520772-5972-4b8f-bac8-16796cc97708" value="YOUR_WEB3FORMS_ACCESS_KEY">
-                <input type="hidden" name="subject" value="New VFX Portfolio Message from GoddessR15 Site">
+                <input type="hidden" name="access_key" value="b3a7a98b-98ba-49f7-94bc-91dbeb942ec7">
+                <input type="hidden" name="subject" value="New VFX Inquiry from GoddessR15 Portfolio">
                 
                 <div>
                     <label class="block text-xs font-gaming text-gray-400 mb-1">YOUR NAME</label>
@@ -155,30 +174,106 @@
 
     <!-- FOOTER -->
     <footer class="bg-black/90 border-t border-yellow-500/20 py-8 text-center text-xs text-gray-500 font-gaming">
-        <p>© 2026 GoddessR15 Roblox VFX Portfolio. All rights reserved.</p>
+        <p>© 2026 GoddessR15 Roblox VFX Portfolio | Developer: aadi__22</p>
     </footer>
 
-    <!-- SCRIPT FOR TABS -->
+    <!-- SCRIPT FOR TABS & ANIMATED PARTICLE PLAYER -->
     <script>
         function switchTab(tabId) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            // Remove active styles from all buttons
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('text-yellow-400', 'bg-yellow-500/10', 'border', 'border-yellow-500/30');
                 btn.classList.add('text-gray-400');
             });
-            // Show target tab
             document.getElementById(tabId).classList.add('active');
-            // Highlight active button
             const activeBtn = document.getElementById('btn-' + tabId);
             if(activeBtn) {
                 activeBtn.classList.remove('text-gray-400');
                 activeBtn.classList.add('text-yellow-400', 'bg-yellow-500/10', 'border', 'border-yellow-500/30');
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- Interactive Canvas Particle Simulation ---
+        const canvas = document.getElementById('vfxCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let isPlaying = true;
+        let currentColor = '#ffd700';
+        let currentThemeName = 'GOLDEN GODDESS';
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = canvas.width / 2 + (Math.random() - 0.5) * 80;
+                this.y = canvas.height / 2 + 50 + (Math.random() - 0.5) * 40;
+                this.size = Math.random() * 4 + 1;
+                this.speedY = -(Math.random() * 3 + 1.5);
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.life = 1;
+                this.decay = Math.random() * 0.02 + 0.01;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.life -= this.decay;
+                if (this.life <= 0) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.life;
+                ctx.fillStyle = currentColor;
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = currentColor;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 70; i++) particles.push(new Particle());
+
+        function animateVfx() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw simulated character silhouette in center
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.fillRect(canvas.width / 2 - 25, canvas.height / 2 - 40, 50, 90);
+
+            if (isPlaying) {
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+            }
+            requestAnimationFrame(animateVfx);
+        }
+        animateVfx();
+
+        function playVfx() {
+            isPlaying = true;
+            document.getElementById('auraStatus').innerText = `STATUS: ACTIVE (${currentThemeName})`;
+        }
+        function stopVfx() {
+            isPlaying = false;
+            document.getElementById('auraStatus').innerText = `STATUS: STOPPED`;
+        }
+        function setAuraTheme(theme, color) {
+            currentColor = color;
+            currentThemeName = theme.toUpperCase() + ' GODDESS';
+            if(isPlaying) {
+                document.getElementById('auraStatus').innerText = `STATUS: ACTIVE (${currentThemeName})`;
+            }
         }
     </script>
 </body>
