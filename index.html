@@ -1,96 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoddessR15 | Roblox VFX Portfolio</title>
-    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Anime/Gaming Vibe -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Rajdhani', sans-serif; background-color: #0b0f19; color: #f3f4f6; }
+        body { font-family: 'Rajdhani', sans-serif; background-color: #05070b; color: #f3f4f6; }
         .font-gaming { font-family: 'Orbitron', sans-serif; }
-        .anime-glow { box-shadow: 0 0 25px rgba(255, 215, 0, 0.25); }
-        .anime-glow-green { box-shadow: 0 0 25px rgba(0, 255, 120, 0.25); }
-        .card-glass { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 215, 0, 0.2); }
+        .anime-glow { box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); }
+        .card-glass { background: rgba(13, 19, 32, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 215, 0, 0.15); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="min-h-screen overflow-x-hidden">
+<body class="min-h-screen flex flex-col selection:bg-yellow-500 selection:text-black">
 
-    <!-- HERO SECTION -->
-    <header class="relative text-center py-24 px-4 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-gray-950 to-black border-b border-yellow-500/20">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffd700_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <span class="px-4 py-1.5 text-xs font-gaming tracking-widest text-yellow-400 bg-yellow-500/10 border border-yellow-500/30 rounded-full uppercase">Roblox VFX Developer & Animator</span>
-            <h1 class="text-5xl md:text-7xl font-black font-gaming mt-6 tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-500 to-amber-600">
-                GODDESS R15 VFX
-            </h1>
-            <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-2xl mx-auto">
-                Crafting high-intensity, combat-ready particle auras, divine elements, and anime-styled magic for next-gen Roblox experiences.
-            </p>
-            <div class="mt-8 flex justify-center gap-4">
-                <a href="#works" class="px-8 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-gaming font-bold rounded-lg anime-glow hover:scale-105 transition">EXPLORE WORKS</a>
-                <a href="#contact" class="px-8 py-3 bg-gray-900 text-yellow-400 border border-yellow-500/40 font-gaming font-bold rounded-lg hover:bg-gray-800 transition">HIRE ME</a>
+    <!-- NAV BAR -->
+    <nav class="sticky top-0 z-50 bg-[#05070b]/90 backdrop-blur-md border-b border-yellow-500/20 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 bg-yellow-400 rounded-full animate-ping"></div>
+                <span class="font-gaming font-black text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-500">GODDESS_R15</span>
             </div>
+            <!-- Navigation Tabs -->
+            <div class="hidden md:flex space-x-2 font-gaming text-sm">
+                <button onclick="switchTab('home')" id="btn-home" class="nav-btn px-4 py-2 rounded-lg transition text-yellow-400 bg-yellow-500/10 border border-yellow-500/30">HOME</button>
+                <button onclick="switchTab('works')" id="btn-works" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">AURA WORKS</button>
+                <button onclick="switchTab('showcase')" id="btn-showcase" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">VFX LAB</button>
+                <button onclick="switchTab('contact')" id="btn-contact" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">CONTACT</button>
+            </div>
+            <a href="https://discord.com/users/aadi__22" target="_blank" class="px-4 py-2 bg-indigo-600/20 border border-indigo-500/40 text-indigo-300 font-gaming text-xs rounded-lg hover:bg-indigo-600/30 transition">DISCORD: aadi__22</a>
         </div>
-    </header>
+    </nav>
 
-    <!-- PORTFOLIO WORKS -->
-    <main id="works" class="max-w-6xl mx-auto py-20 px-4">
-        <h2 class="text-3xl font-black font-gaming text-center mb-12 tracking-wide text-yellow-400">FEATURED VFX BUILDS</h2>
+    <!-- TAB 1: HOME -->
+    <div id="home" class="tab-content active flex-grow">
+        <header class="relative text-center py-28 px-4 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-gray-950 to-black border-b border-yellow-500/10">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffd700_1px,transparent_1px)] [background-size:20px_20px]"></div>
+            <div class="relative z-10 max-w-4xl mx-auto">
+                <span class="px-4 py-1.5 text-xs font-gaming tracking-widest text-yellow-400 bg-yellow-500/10 border border-yellow-500/30 rounded-full uppercase">Roblox VFX Developer & Rig Specialist</span>
+                <h1 class="text-5xl md:text-8xl font-black font-gaming mt-6 tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-amber-600">
+                    DIVINE AURA VFX
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-2xl mx-auto font-medium">
+                    Mastering high-end particle systems, volumetric smoke auras, and combat VFX for R15 rigs in Roblox Studio.
+                </p>
+                <div class="mt-8 flex justify-center gap-4">
+                    <button onclick="switchTab('works')" class="px-8 py-3.5 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg anime-glow hover:scale-105 transition">EXPLORE AURA PACK</button>
+                    <button onclick="switchTab('contact')" class="px-8 py-3.5 bg-gray-900 text-yellow-400 border border-yellow-500/40 font-gaming font-bold rounded-lg hover:bg-gray-800 transition">HIRE ME</button>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- TAB 2: AURA WORKS -->
+    <div id="works" class="tab-content flex-grow max-w-6xl mx-auto py-16 px-6 w-full">
+        <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">ROBLOX R15 AURA COLLECTION</h2>
+        <p class="text-gray-400 mb-10">Tested and optimized in Roblox Studio using Luau script automation.</p>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Card 1: Golden Goddess -->
+            <!-- Card 1 -->
             <div class="card-glass rounded-xl p-6 hover:border-yellow-400 transition group">
-                <div class="h-48 bg-gradient-to-br from-yellow-900/40 to-black rounded-lg flex items-center justify-center border border-yellow-500/20 mb-4 group-hover:scale-[1.02] transition">
-                    <span class="font-gaming text-yellow-300 tracking-wider">☀️ Solar Goddess R15</span>
+                <div class="h-44 bg-gradient-to-br from-yellow-950/60 to-black rounded-lg flex items-center justify-center border border-yellow-500/20 mb-4 group-hover:scale-[1.02] transition">
+                    <span class="font-gaming text-yellow-300 text-lg font-bold">☀️ Golden Goddess</span>
                 </div>
-                <h3 class="text-xl font-bold font-gaming text-white">Solar Goddess Aura</h3>
-                <p class="text-gray-400 text-sm mt-2">Multi-layered golden volumetric smoke, electric arcs, eye glints, and stardust embers built for R15 rigs.</p>
-                <div class="mt-4 flex gap-2">
-                    <span class="text-xs px-2.5 py-1 bg-yellow-500/10 text-yellow-300 rounded border border-yellow-500/20">Luau Script</span>
-                    <span class="text-xs px-2.5 py-1 bg-amber-500/10 text-amber-300 rounded border border-amber-500/20">Particles</span>
-                </div>
+                <h3 class="text-xl font-bold font-gaming text-white">Solar Goddess R15</h3>
+                <p class="text-gray-400 text-sm mt-2">Volumetric gold smoke, radiant eye bursts, lightning arcs, and glowing outline highlights.</p>
+                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-yellow-500/10 text-yellow-300 rounded border border-yellow-500/20 font-gaming">Active Script Ready</span>
             </div>
 
-            <!-- Card 2: Emerald Deity -->
+            <!-- Card 2 -->
             <div class="card-glass rounded-xl p-6 hover:border-emerald-400 transition group">
-                <div class="h-48 bg-gradient-to-br from-emerald-900/40 to-black rounded-lg flex items-center justify-center border border-emerald-500/20 mb-4 group-hover:scale-[1.02] transition">
-                    <span class="font-gaming text-emerald-300 tracking-wider">🌿 Emerald Deity R15</span>
+                <div class="h-44 bg-gradient-to-br from-emerald-950/60 to-black rounded-lg flex items-center justify-center border border-emerald-500/20 mb-4 group-hover:scale-[1.02] transition">
+                    <span class="font-gaming text-emerald-300 text-lg font-bold">🌿 Emerald Nature</span>
                 </div>
-                <h3 class="text-xl font-bold font-gaming text-white">Nature Emerald Aura</h3>
-                <p class="text-gray-400 text-sm mt-2">Vibrant jade energy aura with clean character outline highlight, orbiting speed slashes, and smooth smoke.</p>
-                <div class="mt-4 flex gap-2">
-                    <span class="text-xs px-2.5 py-1 bg-emerald-500/10 text-emerald-300 rounded border border-emerald-500/20">Aura VFX</span>
-                    <span class="text-xs px-2.5 py-1 text-green-300 bg-green-500/10 rounded border border-green-500/20">Highlight</span>
-                </div>
+                <h3 class="text-xl font-bold font-gaming text-white">Deity Emerald Aura</h3>
+                <p class="text-gray-400 text-sm mt-2">Jade green aura smoke, orbiting speed slashes, stardust embers, and emerald highlights.</p>
+                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-emerald-500/10 text-emerald-300 rounded border border-emerald-500/20 font-gaming">Active Script Ready</span>
             </div>
 
-            <!-- Card 3: Ultimate Impact AoE -->
+            <!-- Card 3 -->
             <div class="card-glass rounded-xl p-6 hover:border-red-400 transition group">
-                <div class="h-48 bg-gradient-to-br from-red-900/40 to-black rounded-lg flex items-center justify-center border border-red-500/20 mb-4 group-hover:scale-[1.02] transition">
-                    <span class="font-gaming text-red-400 tracking-wider">💥 Ultimate Shockwave</span>
+                <div class="h-44 bg-gradient-to-br from-red-950/60 to-black rounded-lg flex items-center justify-center border border-red-500/20 mb-4 group-hover:scale-[1.02] transition">
+                    <span class="font-gaming text-red-400 text-lg font-bold">🔥 Solar Crimson</span>
                 </div>
-                <h3 class="text-xl font-bold font-gaming text-white">Impact Blast & Slams</h3>
-                <p class="text-gray-400 text-sm mt-2">Cinematic shockwave rings, ground debris scaling, camera shake triggers, and impact flash frames.</p>
-                <div class="mt-4 flex gap-2">
-                    <span class="text-xs px-2.5 py-1 bg-red-500/10 text-red-300 rounded border border-red-500/20">Combat VFX</span>
-                    <span class="text-xs px-2.5 py-1 bg-orange-500/10 text-orange-300 rounded border border-orange-500/20">Shocks</span>
-                </div>
+                <h3 class="text-xl font-bold font-gaming text-white">R15 Pure Crimson</h3>
+                <p class="text-gray-400 text-sm mt-2">Intense high-velocity red flame emission, eye glints, and heat distortion waves.</p>
+                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-red-500/10 text-red-300 rounded border border-red-500/20 font-gaming">Active Script Ready</span>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- CONTACT SECTION -->
-    <footer id="contact" class="bg-black/80 border-t border-yellow-500/20 py-16 text-center">
-        <h2 class="text-2xl font-black font-gaming text-yellow-400 mb-4">READY TO LEVEL UP YOUR GAME?</h2>
-        <p class="text-gray-400 mb-6">Open for Roblox VFX commissions, weapon traces, and combat system scripts.</p>
-        <div class="flex justify-center gap-6 font-gaming text-sm">
-            <span class="text-gray-300">Discord: <strong class="text-yellow-400">YourDiscordHandle</strong></span>
-            <span class="text-gray-300">Roblox Studio ID: <strong class="text-yellow-400">GoddessR15</strong></span>
+    <!-- TAB 3: VFX LAB -->
+    <div id="showcase" class="tab-content flex-grow max-w-6xl mx-auto py-16 px-6 w-full">
+        <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">VFX LAB & CAPABILITIES</h2>
+        <p class="text-gray-400 mb-10">Technical overview of Roblox Studio systems built for high-performance games.</p>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="card-glass p-6 rounded-xl border border-yellow-500/20">
+                <h3 class="text-lg font-bold font-gaming text-yellow-300 mb-2">⚡ Script Automation</h3>
+                <p class="text-gray-400 text-sm">Command bar and server script injection supporting automatic target rig detection (`Goddess R15`), clean garbage collection of old attachments, and zero lag.</p>
+            </div>
+            <div class="card-glass p-6 rounded-xl border border-yellow-500/20">
+                <h3 class="text-lg font-bold font-gaming text-yellow-300 mb-2">✨ Particle Layers</h3>
+                <p class="text-gray-400 text-sm">Multi-layered particle stacks combining volumetric smoke clouds, rotating fire textures, spark flickers, and custom star glints.</p>
+            </div>
         </div>
+    </div>
+
+    <!-- TAB 4: CONTACT (WORKS WITH YOUR GMAIL) -->
+    <div id="contact" class="tab-content flex-grow max-w-4xl mx-auto py-16 px-6 w-full">
+        <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">GET IN TOUCH</h2>
+        <p class="text-gray-400 mb-8">Send a commission request or project inquiry directly to my inbox.</p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="card-glass p-8 rounded-xl border border-yellow-500/20 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold font-gaming text-white mb-4">Direct Contacts</h3>
+                    <p class="text-gray-300 text-sm mb-3">📧 Gmail: <strong class="text-yellow-400">adityabiranjan37@gmail.com</strong></p>
+                    <p class="text-gray-300 text-sm mb-6">💬 Discord: <strong class="text-yellow-400">aadi__22</strong></p>
+                </div>
+                <div class="p-4 bg-yellow-500/5 rounded-lg border border-yellow-500/20 text-xs text-yellow-300">
+                    ⚡ Fast response within 24 hours on Discord or email.
+                </div>
+            </div>
+
+            <!-- Working Contact Form (Sends to your Gmail via Web3Forms) -->
+            <form action="https://api.web3forms.com/submit" method="POST" class="card-glass p-8 rounded-xl border border-yellow-500/20 space-y-4">
+                <!-- Replace with your free access key from web3forms.com -->
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                <input type="hidden" name="subject" value="New VFX Portfolio Message from GoddessR15 Site">
+                
+                <div>
+                    <label class="block text-xs font-gaming text-gray-400 mb-1">YOUR NAME</label>
+                    <input type="text" name="name" required class="w-full bg-black/50 border border-yellow-500/30 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-yellow-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-gaming text-gray-400 mb-1">YOUR EMAIL</label>
+                    <input type="email" name="email" required class="w-full bg-black/50 border border-yellow-500/30 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-yellow-400">
+                </div>
+                <div>
+                    <label class="block text-xs font-gaming text-gray-400 mb-1">MESSAGE</label>
+                    <textarea name="message" rows="4" required class="w-full bg-black/50 border border-yellow-500/30 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-yellow-400"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg hover:opacity-90 transition">
+                    SEND MESSAGE TO GMAIL
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-black/90 border-t border-yellow-500/20 py-8 text-center text-xs text-gray-500 font-gaming">
+        <p>© 2026 GoddessR15 Roblox VFX Portfolio. All rights reserved.</p>
     </footer>
 
+    <!-- SCRIPT FOR TABS -->
+    <script>
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active styles from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-yellow-400', 'bg-yellow-500/10', 'border', 'border-yellow-500/30');
+                btn.classList.add('text-gray-400');
+            });
+            // Show target tab
+            document.getElementById(tabId).classList.add('active');
+            // Highlight active button
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if(activeBtn) {
+                activeBtn.classList.remove('text-gray-400');
+                activeBtn.classList.add('text-yellow-400', 'bg-yellow-500/10', 'border', 'border-yellow-500/30');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
