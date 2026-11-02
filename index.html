@@ -29,6 +29,7 @@
                 <button onclick="switchTab('home')" id="btn-home" class="nav-btn px-4 py-2 rounded-lg transition text-yellow-400 bg-yellow-500/10 border border-yellow-500/30">HOME</button>
                 <button onclick="switchTab('works')" id="btn-works" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">AURAS</button>
                 <button onclick="switchTab('showcase')" id="btn-showcase" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">VFX PLAYER</button>
+                <button onclick="switchTab('admin')" id="btn-admin" class="nav-btn px-4 py-2 rounded-lg transition text-indigo-400 hover:text-indigo-300 border border-indigo-500/30 bg-indigo-500/10">⚙️ ADMIN PANEL</button>
                 <button onclick="switchTab('contact')" id="btn-contact" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">CONTACT</button>
             </div>
             <a href="https://discord.com/users/aadi__22" target="_blank" class="px-4 py-2 bg-indigo-600/20 border border-indigo-500/40 text-indigo-300 font-gaming text-xs rounded-lg hover:bg-indigo-600/30 transition">DISCORD: aadi__22</a>
@@ -49,34 +50,78 @@
                 </p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
                     <button onclick="switchTab('works')" class="px-8 py-3.5 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg anime-glow-gold hover:scale-105 transition">EXPLORE AURA PACK</button>
-                    <button onclick="switchTab('contact')" class="px-8 py-3.5 bg-gray-900 text-yellow-400 border border-yellow-500/40 font-gaming font-bold rounded-lg hover:bg-gray-800 transition">HIRE ME</button>
+                    <button onclick="switchTab('admin')" class="px-8 py-3.5 bg-indigo-950 text-indigo-300 border border-indigo-500/40 font-gaming font-bold rounded-lg hover:bg-indigo-900 transition">ADMIN UPLOAD</button>
                 </div>
             </div>
         </header>
     </div>
 
-    <!-- TAB 2: DYNAMIC AURA CATALOGUE (Auto-generated from Javascript list below) -->
+    <!-- TAB 2: DYNAMIC AURA CATALOGUE -->
     <div id="works" class="tab-content flex-grow max-w-6xl mx-auto py-16 px-6 w-full">
         <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">R15 GODDESS AURA PACK</h2>
-        <p class="text-gray-400 mb-10">Click any aura card below to view its full details, preview image, and copyable Roblox Studio script.</p>
+        <p class="text-gray-400 mb-10">Click any aura card below to view details, descriptions, and copyable Roblox Studio scripts.</p>
         
-        <!-- Grid container where cards automatically appear -->
         <div id="auraGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Cards load automatically via Javascript -->
+            <!-- Dynamically populated -->
         </div>
     </div>
 
-    <!-- AURA DETAIL MODAL / PAGE VIEW -->
+    <!-- AURA DETAIL MODAL -->
     <div id="auraDetailModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
         <div class="card-glass max-w-2xl w-full p-6 rounded-2xl border border-yellow-500/40 relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeDetail()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-gaming text-lg">✕</button>
-            <div id="modalContent">
-                <!-- Dynamic content injected here -->
-            </div>
+            <div id="modalContent"></div>
         </div>
     </div>
 
-    <!-- TAB 3: INTERACTIVE VFX PLAYER -->
+    <!-- TAB 3: ADMIN PANEL (UPLOAD NEW AURA) -->
+    <div id="admin" class="tab-content flex-grow max-w-3xl mx-auto py-16 px-6 w-full">
+        <!-- Login Screen -->
+        <div id="adminLoginBox" class="card-glass p-8 rounded-2xl border border-indigo-500/30 text-center max-w-md mx-auto">
+            <h2 class="text-2xl font-black font-gaming text-indigo-400 mb-4">ADMIN ACCESS</h2>
+            <p class="text-gray-400 text-sm mb-6">Enter admin password to upload new auras & VFX scripts.</p>
+            <input type="password" id="adminPass" placeholder="Enter Password (aadi2026)" class="w-full bg-black/50 border border-indigo-500/40 rounded-lg px-4 py-2.5 text-white text-sm mb-4 focus:outline-none focus:border-indigo-400">
+            <button onclick="checkAdmin()" class="w-full py-3 bg-indigo-600 text-white font-gaming font-bold rounded-lg hover:bg-indigo-500 transition">UNLOCK ADMIN PANEL</button>
+        </div>
+
+        <!-- Dashboard Form (Hidden until logged in) -->
+        <div id="adminDashboard" class="card-glass p-8 rounded-2xl border border-indigo-500/30 hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-black font-gaming text-indigo-400">⚙️ ADD NEW VFX / AURA</h2>
+                <button onclick="logoutAdmin()" class="text-xs text-red-400 font-gaming hover:underline">Lock Admin</button>
+            </div>
+            
+            <form id="newAuraForm" onsubmit="addNewAura(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-gaming text-gray-400 mb-1">AURA TITLE</label>
+                    <input type="text" id="newTitle" required placeholder="e.g. Azure Astral R15" class="w-full bg-black/50 border border-indigo-500/30 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-400">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-gaming text-gray-400 mb-1">CATEGORY</label>
+                        <input type="text" id="newCategory" required placeholder="e.g. Combat VFX" class="w-full bg-black/50 border border-indigo-500/30 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-gaming text-gray-400 mb-1">THEME COLOR (Hex)</label>
+                        <input type="color" id="newColor" value="#3b82f6" class="w-full h-10 bg-black/50 border border-indigo-500/30 rounded-lg px-2 py-1 cursor-pointer">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-gaming text-gray-400 mb-1">SHORT DESCRIPTION</label>
+                    <textarea id="newDesc" rows="2" required placeholder="Brief description of the effect..." class="w-full bg-black/50 border border-indigo-500/30 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-400"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-gaming text-gray-400 mb-1">ROBLOX LUA COMMAND BAR SCRIPT</label>
+                    <textarea id="newScript" rows="6" required placeholder="Paste your Lua script here..." class="w-full bg-black/50 border border-indigo-500/30 rounded-lg px-4 py-2.5 text-yellow-300 font-mono text-xs focus:outline-none focus:border-indigo-400"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-gaming font-bold rounded-lg hover:opacity-90 transition">
+                    🚀 PUBLISH NEW AURA TO WEBSITE
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TAB 4: VFX PLAYER -->
     <div id="showcase" class="tab-content flex-grow max-w-5xl mx-auto py-16 px-6 w-full">
         <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">LIVE VFX AURA PLAYER</h2>
         <p class="text-gray-400 mb-8">Test particle emission live with custom anime theme colors and play/stop controls.</p>
@@ -92,7 +137,7 @@
             <div class="flex flex-wrap justify-center items-center gap-4 w-full">
                 <button onclick="setAuraTheme('gold', '#ffd700')" class="px-4 py-2 bg-yellow-500/20 border border-yellow-400 text-yellow-300 font-gaming text-xs rounded-lg hover:bg-yellow-500/30 transition">☀️ Gold</button>
                 <button onclick="setAuraTheme('green', '#00ff78')" class="px-4 py-2 bg-emerald-500/20 border border-emerald-400 text-emerald-300 font-gaming text-xs rounded-lg hover:bg-emerald-500/30 transition">🌿 Emerald</button>
-                <button onclick="setAuraTheme('red', '#ff3c3c')" class="px-4 py-2 bg-red-500/20 border border-red-400 text-red-300 font-gaming text-xs rounded-lg hover:bg-red-500/30 transition">🔥 Crimson</button>
+                <button onclick="setAuraTheme('red', '#ff3c3c')" class="px-4 py-2 bg-red-500/20 border border-red-400 text-red-300 font-gaming text-xs rounded-lg hover:bg-red-400 transition">🔥 Crimson</button>
                 <button onclick="setAuraTheme('blue', '#3b82f6')" class="px-4 py-2 bg-blue-500/20 border border-blue-400 text-blue-300 font-gaming text-xs rounded-lg hover:bg-blue-500/30 transition">⚡ Azure</button>
                 
                 <div class="h-6 w-[1px] bg-gray-700 hidden sm:block"></div>
@@ -103,7 +148,7 @@
         </div>
     </div>
 
-    <!-- TAB 4: CONTACT & EMAIL BACKEND -->
+    <!-- TAB 5: CONTACT -->
     <div id="contact" class="tab-content flex-grow max-w-4xl mx-auto py-16 px-6 w-full">
         <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">GET IN TOUCH</h2>
         <p class="text-gray-400 mb-8">Send a commission inquiry directly to adityabiranjan37@gmail.com.</p>
@@ -148,20 +193,17 @@
         <p>© 2026 GoddessR15 Roblox VFX Portfolio | Developer: aadi__22</p>
     </footer>
 
-    <!-- JAVASCRIPT: ADMIN AURA MANAGER & ANIMATIONS -->
+    <!-- SCRIPT & ADMIN CONTROLS -->
     <script>
-        // =========================================================================
-        // 🛠️ ADMIN AURA MANAGER: ADD NEW AURAS HERE MANUALLY WITH CODING LATER!
-        // =========================================================================
-        const myAuras = [
+        // Initial Default Auras
+        const defaultAuras = [
             {
                 id: "solar-goddess",
                 title: "Solar Goddess R15",
                 category: "Divine Aura",
                 themeColor: "#ffd700",
                 description: "Volumetric gold smoke, radiant eye bursts, lightning arcs, and glowing outline highlights designed for Goddess R15.",
-                image: "", // You can put your image URL here e.g. "images/gold.png"
-                scriptCode: "-- Paste your Roblox Command Bar Lua script for Solar Goddess here\nprint('Solar Goddess Loaded!')"
+                scriptCode: "-- Solar Goddess Command Bar Script\nprint('Solar Goddess Loaded!')"
             },
             {
                 id: "emerald-deity",
@@ -169,8 +211,7 @@
                 category: "Nature Deity",
                 themeColor: "#00ff78",
                 description: "Jade green aura smoke, orbiting speed slashes, stardust embers, and emerald body highlights.",
-                image: "",
-                scriptCode: "-- Paste your Roblox Command Bar Lua script for Emerald Deity here\nprint('Emerald Deity Loaded!')"
+                scriptCode: "-- Emerald Deity Command Bar Script\nprint('Emerald Deity Loaded!')"
             },
             {
                 id: "pure-crimson",
@@ -178,13 +219,13 @@
                 category: "Solar Combat",
                 themeColor: "#ff3c3c",
                 description: "Intense high-velocity red flame emission, eye glints, and heat distortion waves.",
-                image: "",
-                scriptCode: "-- Paste your Roblox Command Bar Lua script for Crimson here\nprint('Crimson Loaded!')"
+                scriptCode: "-- Pure Crimson Command Bar Script\nprint('Crimson Loaded!')"
             }
-            // 💡 TO ADD A NEW AURA LATER, JUST COPY THE BLOCK ABOVE, PASTE IT WITH A COMMA, AND EDIT DETAILS!
         ];
 
-        // Render Auras Automatically into Grid
+        // Load saved auras from browser storage or defaults
+        let myAuras = JSON.parse(localStorage.getItem('goddess_custom_auras')) || defaultAuras;
+
         function renderAuras() {
             const grid = document.getElementById('auraGrid');
             grid.innerHTML = '';
@@ -196,20 +237,18 @@
                         </div>
                         <h3 class="text-xl font-bold font-gaming text-white">${aura.title}</h3>
                         <p class="text-gray-400 text-sm mt-2">${aura.description}</p>
-                        <span class="inline-block mt-4 text-xs px-2.5 py-1 rounded border font-gaming" style="background: ${aura.themeColor}15; color: ${aura.themeColor}; border-color: ${aura.themeColor}30">View Aura Page →</span>
+                        <span class="inline-block mt-4 text-xs px-2.5 py-1 rounded border font-gaming" style="background: ${aura.themeColor}15; color: ${aura.themeColor}; border-color: ${aura.themeColor}30">View Aura Details →</span>
                     </div>
                 `;
             });
         }
         renderAuras();
 
-        // Open Aura Detail Modal/Page
         function openAura(id) {
             const aura = myAuras.find(a => a.id === id);
             if(!aura) return;
 
-            const modalContent = document.getElementById('modalContent');
-            modalContent.innerHTML = `
+            document.getElementById('modalContent').innerHTML = `
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-xs font-gaming px-3 py-1 rounded uppercase" style="background: ${aura.themeColor}20; color: ${aura.themeColor}">${aura.category}</span>
                     <h2 class="text-2xl font-black font-gaming" style="color: ${aura.themeColor}">${aura.title}</h2>
@@ -232,11 +271,50 @@
             document.getElementById('auraDetailModal').classList.add('hidden');
         }
 
-        // Navigation Tabs Switcher
+        // --- Admin Authentication & Upload Logic ---
+        function checkAdmin() {
+            const pass = document.getElementById('adminPass').value;
+            if(pass === 'aadi2026') { // Admin Password
+                document.getElementById('adminLoginBox').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                alert('Admin Access Granted!');
+            } else {
+                alert('Incorrect Password! Hint: aadi2026');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('adminLoginBox').classList.remove('hidden');
+            document.getElementById('adminPass').value = '';
+        }
+
+        function addNewAura(event) {
+            event.preventDefault();
+            const title = document.getElementById('newTitle').value;
+            const category = document.getElementById('newCategory').value;
+            const themeColor = document.getElementById('newColor').value;
+            const description = document.getElementById('newDesc').value;
+            const scriptCode = document.getElementById('newScript').value;
+            const id = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
+
+            const newAura = { id, title, category, themeColor, description, scriptCode };
+            myAuras.push(newAura);
+            
+            // Save to browser memory
+            localStorage.setItem('goddess_custom_auras', JSON.stringify(myAuras));
+            
+            renderAuras();
+            alert('New Aura published successfully!');
+            document.getElementById('newAuraForm').reset();
+            switchTab('works');
+        }
+
+        // Navigation Switcher
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-yellow-400', 'bg-yellow-500/10', 'border', 'border-yellow-500/30');
+                btn.classList.remove('text-yellow-400', 'bg-yellow-500/10', 'border', 'border-yellow-500/30', 'text-indigo-400');
                 btn.classList.add('text-gray-400');
             });
             document.getElementById(tabId).classList.add('active');
