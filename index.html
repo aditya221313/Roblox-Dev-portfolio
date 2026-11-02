@@ -74,17 +74,17 @@
         </div>
     </div>
 
-    <!-- TAB 3: ADMIN PANEL (UPLOAD WITH PHOTO/VIDEO) -->
+    <!-- TAB 3: ADMIN PANEL -->
     <div id="admin" class="tab-content flex-grow max-w-3xl mx-auto py-16 px-6 w-full">
         <!-- Login Screen -->
         <div id="adminLoginBox" class="card-glass p-8 rounded-2xl border border-indigo-500/30 text-center max-w-md mx-auto">
             <h2 class="text-2xl font-black font-gaming text-indigo-400 mb-4">ADMIN ACCESS</h2>
-            <p class="text-gray-400 text-sm mb-6">Enter admin password to upload new auras & media previews.</p>
+            <p class="text-gray-400 text-sm mb-6">Enter admin password to manage, upload, or delete auras.</p>
             <input type="password" id="adminPass" placeholder="Enter Password" class="w-full bg-black/50 border border-indigo-500/40 rounded-lg px-4 py-2.5 text-white text-sm mb-4 focus:outline-none focus:border-indigo-400">
             <button onclick="checkAdmin()" class="w-full py-3 bg-indigo-600 text-white font-gaming font-bold rounded-lg hover:bg-indigo-500 transition">UNLOCK ADMIN PANEL</button>
         </div>
 
-        <!-- Dashboard Form -->
+        <!-- Dashboard Form & Management -->
         <div id="adminDashboard" class="card-glass p-8 rounded-2xl border border-indigo-500/30 hidden">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-black font-gaming text-indigo-400">⚙️ ADD NEW VFX / AURA</h2>
@@ -107,8 +107,8 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-gaming text-gray-400 mb-1">IMAGE OR VIDEO URL (Optional)</label>
-                    <input type="text" id="newMedia" placeholder="Paste image link (.png/.jpg) or video link (.mp4)" class="w-full bg-black/50 border border-indigo-500/30 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-400">
+                    <label class="block text-xs font-gaming text-gray-400 mb-1">IMAGE OR VIDEO FILE NAME / URL (Optional)</label>
+                    <input type="text" id="newMedia" placeholder="e.g. Four Neon Auras Under Stormy Skies.png" class="w-full bg-black/50 border border-indigo-500/30 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-400">
                 </div>
                 <div>
                     <label class="block text-xs font-gaming text-gray-400 mb-1">SHORT DESCRIPTION</label>
@@ -122,6 +122,14 @@
                     🚀 PUBLISH NEW AURA TO WEBSITE
                 </button>
             </form>
+
+            <hr class="my-8 border-indigo-500/20">
+
+            <!-- DELETE / MANAGE SECTION -->
+            <h3 class="text-lg font-bold font-gaming text-red-400 mb-4">🗑️ MANAGE & DELETE AURAS</h3>
+            <div id="adminDeleteList" class="space-y-3">
+                <!-- Admin items loaded dynamically -->
+            </div>
         </div>
     </div>
 
@@ -199,41 +207,24 @@
 
     <!-- SCRIPT & ADMIN CONTROLS -->
     <script>
-        const defaultAuras = [
-            {
-                id: "solar-goddess",
-                title: "Solar Goddess R15",
-                category: "Divine Aura",
-                themeColor: "#ffd700",
-                mediaUrl: "Four Neon Auras Under Stormy Skies.png",
-                description: "Volumetric gold smoke, radiant eye bursts, lightning arcs, and glowing outline highlights designed for Goddess R15.",
-                scriptCode: "-- Solar Goddess Command Bar Script\nprint('Solar Goddess Loaded!')"
-            },
-            {
-                id: "emerald-deity",
-                title: "Deity Emerald Aura",
-                category: "Nature Deity",
-                themeColor: "#00ff78",
-                mediaUrl: "Four Neon Auras Under Stormy Skies (1).png",
-                description: "Jade green aura smoke, orbiting speed slashes, stardust embers, and emerald body highlights.",
-                scriptCode: "-- Emerald Deity Command Bar Script\nprint('Emerald Deity Loaded!')"
-            },
-            {
-                id: "pure-crimson",
-                title: "R15 Pure Crimson",
-                category: "Solar Combat",
-                themeColor: "#ff3c3c",
-                mediaUrl: "Four Neon Auras Under Stormy Skies (2).png",
-                description: "Intense high-velocity red flame emission, eye glints, and heat distortion waves.",
-                scriptCode: "-- Pure Crimson Command Bar Script\nprint('Crimson Loaded!')"
-            }
-        ];
+        // Start with empty defaults array
+        const defaultAuras = [];
 
         let myAuras = JSON.parse(localStorage.getItem('goddess_custom_auras')) || defaultAuras;
 
         function renderAuras() {
             const grid = document.getElementById('auraGrid');
+            const deleteList = document.getElementById('adminDeleteList');
+            
             grid.innerHTML = '';
+            if (deleteList) deleteList.innerHTML = '';
+
+            if (myAuras.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500 font-gaming text-sm">No auras added yet. Unlock the Admin Panel to add your first aura!</div>`;
+                if (deleteList) deleteList.innerHTML = `<div class="text-xs text-gray-500">No auras available to delete.</div>`;
+                return;
+            }
+
             myAuras.forEach(aura => {
                 let mediaContent = `<span class="font-gaming text-lg font-bold" style="color: ${aura.themeColor}">${aura.title}</span>`;
                 if (aura.mediaUrl) {
@@ -254,6 +245,15 @@
                         <span class="inline-block mt-4 text-xs px-2.5 py-1 rounded border font-gaming" style="background: ${aura.themeColor}15; color: ${aura.themeColor}; border-color: ${aura.themeColor}30">View Aura Details →</span>
                     </div>
                 `;
+
+                if (deleteList) {
+                    deleteList.innerHTML += `
+                        <div class="flex justify-between items-center bg-black/40 p-3 rounded-lg border border-indigo-500/20 text-xs">
+                            <span class="font-gaming text-white">${aura.title}</span>
+                            <button onclick="deleteAura('${aura.id}')" class="px-3 py-1 bg-red-600/20 border border-red-500/40 text-red-300 rounded hover:bg-red-600 transition font-gaming">DELETE</button>
+                        </div>
+                    `;
+                }
             });
         }
         renderAuras();
@@ -282,7 +282,7 @@
                     <label class="block text-xs font-gaming text-gray-400 mb-2">ROBLOX STUDIO LUA SCRIPT:</label>
                     <textarea readonly class="w-full h-40 bg-black/80 border border-yellow-500/30 rounded-lg p-3 text-xs text-yellow-300 font-mono focus:outline-none">${aura.scriptCode}</textarea>
                 </div>
-                <button onclick="navigator.clipboard.writeText(` + '`' + aura.scriptCode + '`' + `); alert('Script copied to clipboard!');" class="w-full py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg hover:opacity-90 transition">
+                <button onclick="navigator.clipboard.writeText(\`${aura.scriptCode.replace(/`/g, '\\`')}\`); alert('Script copied to clipboard!');" class="w-full py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg hover:opacity-90 transition">
                     COPY LUA SCRIPT
                 </button>
             `;
@@ -300,6 +300,7 @@
             if(pass === 'aadi2026') {
                 document.getElementById('adminLoginBox').classList.add('hidden');
                 document.getElementById('adminDashboard').classList.remove('hidden');
+                renderAuras();
                 alert('Admin Access Granted!');
             } else {
                 alert('Incorrect Password! Hint: aadi2026');
@@ -320,7 +321,7 @@
             const mediaUrl = document.getElementById('newMedia').value;
             const description = document.getElementById('newDesc').value;
             const scriptCode = document.getElementById('newScript').value;
-            const id = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            const id = title.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-' + Date.now();
 
             const newAura = { id, title, category, themeColor, mediaUrl, description, scriptCode };
             myAuras.push(newAura);
@@ -331,6 +332,15 @@
             alert('New Aura published successfully!');
             document.getElementById('newAuraForm').reset();
             switchTab('works');
+        }
+
+        function deleteAura(id) {
+            if (confirm('Are you sure you want to delete this aura?')) {
+                myAuras = myAuras.filter(aura => aura.id !== id);
+                localStorage.setItem('goddess_custom_auras', JSON.stringify(myAuras));
+                renderAuras();
+                alert('Aura deleted successfully!');
+            }
         }
 
         function switchTab(tabId) {
