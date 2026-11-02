@@ -4,36 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoddessR15 | Ultimate Roblox VFX Portfolio</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Anime/Gaming Vibe -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Rajdhani', sans-serif; background-color: #030508; color: #f3f4f6; overflow-x: hidden; }
         .font-gaming { font-family: 'Orbitron', sans-serif; }
         .anime-glow-gold { box-shadow: 0 0 35px rgba(255, 215, 0, 0.25); }
-        .anime-glow-green { box-shadow: 0 0 35px rgba(0, 255, 120, 0.25); }
-        .anime-glow-red { box-shadow: 0 0 35px rgba(255, 60, 60, 0.25); }
-        .anime-glow-blue { box-shadow: 0 0 35px rgba(59, 130, 246, 0.25); }
-        .card-glass { background: rgba(10, 15, 25, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.2); }
+        .card-glass { background: rgba(10, 15, 25, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.2); }
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: animeFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes animeFade { from { opacity: 0; transform: translateY(15px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        
-        /* Interactive Canvas Particle Animation */
-        #vfxCanvas { background: radial-gradient(circle at center, #0f172a 0%, #030508 100%); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-yellow-400 selection:text-black">
 
-    <!-- ANIME NAVIGATION BAR -->
+    <!-- NAVIGATION BAR -->
     <nav class="sticky top-0 z-50 bg-[#030508]/90 backdrop-blur-md border-b border-yellow-500/20 px-6 py-4">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-3">
                 <div class="w-3.5 h-3.5 bg-yellow-400 rounded-full animate-ping"></div>
                 <span class="font-gaming font-black text-xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500">GODDESS_R15</span>
             </div>
-            <!-- Tabs -->
             <div class="flex flex-wrap justify-center gap-2 font-gaming text-xs">
                 <button onclick="switchTab('home')" id="btn-home" class="nav-btn px-4 py-2 rounded-lg transition text-yellow-400 bg-yellow-500/10 border border-yellow-500/30">HOME</button>
                 <button onclick="switchTab('works')" id="btn-works" class="nav-btn px-4 py-2 rounded-lg transition text-gray-400 hover:text-yellow-300 hover:bg-yellow-500/5">AURAS</button>
@@ -57,66 +48,47 @@
                     High-performance particle systems, volumetric smoke, and anime-styled combat auras built for Roblox developers.
                 </p>
                 <div class="mt-8 flex flex-wrap justify-center gap-4">
-                    <button onclick="switchTab('showcase')" class="px-8 py-3.5 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg anime-glow-gold hover:scale-105 transition">TEST LIVE VFX PLAYER</button>
+                    <button onclick="switchTab('works')" class="px-8 py-3.5 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg anime-glow-gold hover:scale-105 transition">EXPLORE AURA PACK</button>
                     <button onclick="switchTab('contact')" class="px-8 py-3.5 bg-gray-900 text-yellow-400 border border-yellow-500/40 font-gaming font-bold rounded-lg hover:bg-gray-800 transition">HIRE ME</button>
                 </div>
             </div>
         </header>
     </div>
 
-    <!-- TAB 2: AURAS CATALOGUE -->
+    <!-- TAB 2: DYNAMIC AURA CATALOGUE (Auto-generated from Javascript list below) -->
     <div id="works" class="tab-content flex-grow max-w-6xl mx-auto py-16 px-6 w-full">
         <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">R15 GODDESS AURA PACK</h2>
-        <p class="text-gray-400 mb-10">Clean script-injected particle bundles optimized for R15 rigs in Roblox Studio workspace.</p>
+        <p class="text-gray-400 mb-10">Click any aura card below to view its full details, preview image, and copyable Roblox Studio script.</p>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Golden Card -->
-            <div class="card-glass rounded-xl p-6 hover:border-yellow-400 transition group anime-glow-gold">
-                <div class="h-44 bg-gradient-to-br from-yellow-950/60 to-black rounded-lg flex items-center justify-center border border-yellow-500/20 mb-4 group-hover:scale-[1.02] transition">
-                    <span class="font-gaming text-yellow-300 text-lg font-bold">☀️ Golden Goddess</span>
-                </div>
-                <h3 class="text-xl font-bold font-gaming text-white">Solar Goddess R15</h3>
-                <p class="text-gray-400 text-sm mt-2">Volumetric gold smoke, radiant eye bursts, lightning arcs, and glowing outline highlights.</p>
-                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-yellow-500/10 text-yellow-300 rounded border border-yellow-500/20 font-gaming">Script Ready</span>
-            </div>
+        <!-- Grid container where cards automatically appear -->
+        <div id="auraGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Cards load automatically via Javascript -->
+        </div>
+    </div>
 
-            <!-- Emerald Card -->
-            <div class="card-glass rounded-xl p-6 hover:border-emerald-400 transition group anime-glow-green">
-                <div class="h-44 bg-gradient-to-br from-emerald-950/60 to-black rounded-lg flex items-center justify-center border border-emerald-500/20 mb-4 group-hover:scale-[1.02] transition">
-                    <span class="font-gaming text-emerald-300 text-lg font-bold">🌿 Emerald Nature</span>
-                </div>
-                <h3 class="text-xl font-bold font-gaming text-white">Deity Emerald Aura</h3>
-                <p class="text-gray-400 text-sm mt-2">Jade green aura smoke, orbiting speed slashes, stardust embers, and emerald highlights.</p>
-                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-emerald-500/10 text-emerald-300 rounded border border-emerald-500/20 font-gaming">Script Ready</span>
-            </div>
-
-            <!-- Red Card -->
-            <div class="card-glass rounded-xl p-6 hover:border-red-400 transition group anime-glow-red">
-                <div class="h-44 bg-gradient-to-br from-red-950/60 to-black rounded-lg flex items-center justify-center border border-red-500/20 mb-4 group-hover:scale-[1.02] transition">
-                    <span class="font-gaming text-red-400 text-lg font-bold">🔥 Solar Crimson</span>
-                </div>
-                <h3 class="text-xl font-bold font-gaming text-white">R15 Pure Crimson</h3>
-                <p class="text-gray-400 text-sm mt-2">Intense high-velocity red flame emission, eye glints, and heat distortion waves.</p>
-                <span class="inline-block mt-4 text-xs px-2.5 py-1 bg-red-500/10 text-red-300 rounded border border-red-500/20 font-gaming">Script Ready</span>
+    <!-- AURA DETAIL MODAL / PAGE VIEW -->
+    <div id="auraDetailModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="card-glass max-w-2xl w-full p-6 rounded-2xl border border-yellow-500/40 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeDetail()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-gaming text-lg">✕</button>
+            <div id="modalContent">
+                <!-- Dynamic content injected here -->
             </div>
         </div>
     </div>
 
-    <!-- TAB 3: INTERACTIVE VFX ANIMATION PLAYER -->
+    <!-- TAB 3: INTERACTIVE VFX PLAYER -->
     <div id="showcase" class="tab-content flex-grow max-w-5xl mx-auto py-16 px-6 w-full">
         <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">LIVE VFX AURA PLAYER</h2>
-        <p class="text-gray-400 mb-8">Test the particle emission live with custom anime theme colors and animation controls.</p>
+        <p class="text-gray-400 mb-8">Test particle emission live with custom anime theme colors and play/stop controls.</p>
         
         <div class="card-glass p-6 rounded-2xl border border-yellow-500/30 flex flex-col items-center">
-            <!-- Canvas Display -->
-            <div class="relative w-full h-80 rounded-xl overflow-hidden border border-yellow-500/20 mb-6 flex items-center justify-center">
+            <div class="relative w-full h-80 rounded-xl overflow-hidden border border-yellow-500/20 mb-6 flex items-center justify-center bg-black">
                 <canvas id="vfxCanvas" class="w-full h-full absolute inset-0"></canvas>
                 <div id="auraStatus" class="absolute top-4 left-4 px-3 py-1 bg-black/70 border border-yellow-500/40 text-yellow-400 font-gaming text-xs rounded-full">
                     STATUS: ACTIVE (GOLDEN GODDESS)
                 </div>
             </div>
 
-            <!-- Controls (Play / Stop / Color Switchers) -->
             <div class="flex flex-wrap justify-center items-center gap-4 w-full">
                 <button onclick="setAuraTheme('gold', '#ffd700')" class="px-4 py-2 bg-yellow-500/20 border border-yellow-400 text-yellow-300 font-gaming text-xs rounded-lg hover:bg-yellow-500/30 transition">☀️ Gold</button>
                 <button onclick="setAuraTheme('green', '#00ff78')" class="px-4 py-2 bg-emerald-500/20 border border-emerald-400 text-emerald-300 font-gaming text-xs rounded-lg hover:bg-emerald-500/30 transition">🌿 Emerald</button>
@@ -134,7 +106,7 @@
     <!-- TAB 4: CONTACT & EMAIL BACKEND -->
     <div id="contact" class="tab-content flex-grow max-w-4xl mx-auto py-16 px-6 w-full">
         <h2 class="text-3xl font-black font-gaming text-yellow-400 mb-2">GET IN TOUCH</h2>
-        <p class="text-gray-400 mb-8">Send a commission inquiry or custom VFX request directly to my Gmail inbox.</p>
+        <p class="text-gray-400 mb-8">Send a commission inquiry directly to adityabiranjan37@gmail.com.</p>
         
         <div class="grid md:grid-cols-2 gap-8">
             <div class="card-glass p-8 rounded-xl border border-yellow-500/20 flex flex-col justify-between">
@@ -144,13 +116,12 @@
                     <p class="text-gray-300 text-sm mb-6">💬 Discord: <strong class="text-yellow-400">aadi__22</strong></p>
                 </div>
                 <div class="p-4 bg-yellow-500/5 rounded-lg border border-yellow-500/20 text-xs text-yellow-300 font-medium">
-                    ⚡ Form messages deliver straight to adityabiranjan37@gmail.com instantly.
+                    ⚡ Form messages deliver straight to your Gmail instantly.
                 </div>
             </div>
 
-            <!-- Working Contact Form -->
             <form action="https://api.web3forms.com/submit" method="POST" class="card-glass p-8 rounded-xl border border-yellow-500/20 space-y-4">
-                <input type="hidden" name="access_key" value="b3a7a98b-98ba-49f7-94bc-91dbeb942ec7">
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
                 <input type="hidden" name="subject" value="New VFX Inquiry from GoddessR15 Portfolio">
                 
                 <div>
@@ -177,8 +148,91 @@
         <p>© 2026 GoddessR15 Roblox VFX Portfolio | Developer: aadi__22</p>
     </footer>
 
-    <!-- SCRIPT FOR TABS & ANIMATED PARTICLE PLAYER -->
+    <!-- JAVASCRIPT: ADMIN AURA MANAGER & ANIMATIONS -->
     <script>
+        // =========================================================================
+        // 🛠️ ADMIN AURA MANAGER: ADD NEW AURAS HERE MANUALLY WITH CODING LATER!
+        // =========================================================================
+        const myAuras = [
+            {
+                id: "solar-goddess",
+                title: "Solar Goddess R15",
+                category: "Divine Aura",
+                themeColor: "#ffd700",
+                description: "Volumetric gold smoke, radiant eye bursts, lightning arcs, and glowing outline highlights designed for Goddess R15.",
+                image: "", // You can put your image URL here e.g. "images/gold.png"
+                scriptCode: "-- Paste your Roblox Command Bar Lua script for Solar Goddess here\nprint('Solar Goddess Loaded!')"
+            },
+            {
+                id: "emerald-deity",
+                title: "Deity Emerald Aura",
+                category: "Nature Deity",
+                themeColor: "#00ff78",
+                description: "Jade green aura smoke, orbiting speed slashes, stardust embers, and emerald body highlights.",
+                image: "",
+                scriptCode: "-- Paste your Roblox Command Bar Lua script for Emerald Deity here\nprint('Emerald Deity Loaded!')"
+            },
+            {
+                id: "pure-crimson",
+                title: "R15 Pure Crimson",
+                category: "Solar Combat",
+                themeColor: "#ff3c3c",
+                description: "Intense high-velocity red flame emission, eye glints, and heat distortion waves.",
+                image: "",
+                scriptCode: "-- Paste your Roblox Command Bar Lua script for Crimson here\nprint('Crimson Loaded!')"
+            }
+            // 💡 TO ADD A NEW AURA LATER, JUST COPY THE BLOCK ABOVE, PASTE IT WITH A COMMA, AND EDIT DETAILS!
+        ];
+
+        // Render Auras Automatically into Grid
+        function renderAuras() {
+            const grid = document.getElementById('auraGrid');
+            grid.innerHTML = '';
+            myAuras.forEach(aura => {
+                grid.innerHTML += `
+                    <div onclick="openAura('${aura.id}')" class="card-glass rounded-xl p-6 hover:border-yellow-400 transition group cursor-pointer" style="border-color: ${aura.themeColor}40">
+                        <div class="relative h-44 bg-black rounded-lg overflow-hidden border mb-4 flex items-center justify-center" style="border-color: ${aura.themeColor}30">
+                            <span class="font-gaming text-lg font-bold" style="color: ${aura.themeColor}">${aura.title}</span>
+                        </div>
+                        <h3 class="text-xl font-bold font-gaming text-white">${aura.title}</h3>
+                        <p class="text-gray-400 text-sm mt-2">${aura.description}</p>
+                        <span class="inline-block mt-4 text-xs px-2.5 py-1 rounded border font-gaming" style="background: ${aura.themeColor}15; color: ${aura.themeColor}; border-color: ${aura.themeColor}30">View Aura Page →</span>
+                    </div>
+                `;
+            });
+        }
+        renderAuras();
+
+        // Open Aura Detail Modal/Page
+        function openAura(id) {
+            const aura = myAuras.find(a => a.id === id);
+            if(!aura) return;
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs font-gaming px-3 py-1 rounded uppercase" style="background: ${aura.themeColor}20; color: ${aura.themeColor}">${aura.category}</span>
+                    <h2 class="text-2xl font-black font-gaming" style="color: ${aura.themeColor}">${aura.title}</h2>
+                </div>
+                <p class="text-gray-300 text-sm mb-6">${aura.description}</p>
+                <div class="mb-4">
+                    <label class="block text-xs font-gaming text-gray-400 mb-2">ROBLOX STUDIO LUA SCRIPT:</label>
+                    <textarea readonly class="w-full h-40 bg-black/80 border border-yellow-500/30 rounded-lg p-3 text-xs text-yellow-300 font-mono focus:outline-none">${aura.scriptCode}</textarea>
+                </div>
+                <button onclick="navigator.clipboard.writeText(` + '`' + aura.scriptCode + '`' + `); alert('Script copied to clipboard!');" class="w-full py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-gaming font-bold rounded-lg hover:opacity-90 transition">
+                    COPY LUA SCRIPT
+                </button>
+            `;
+            document.getElementById('auraDetailModal').classList.remove('hidden');
+            document.getElementById('auraDetailModal').classList.add('flex');
+        }
+
+        function closeDetail() {
+            document.getElementById('auraDetailModal').classList.remove('flex');
+            document.getElementById('auraDetailModal').classList.add('hidden');
+        }
+
+        // Navigation Tabs Switcher
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -194,31 +248,32 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- Interactive Canvas Particle Simulation ---
-        const canvas = document.getElementById('vfxCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        // --- Main VFX Player Canvas ---
+        const mainCanvas = document.getElementById('vfxCanvas');
+        const mainCtx = mainCanvas.getContext('2d');
+        let mainParticles = [];
         let isPlaying = true;
         let currentColor = '#ffd700';
         let currentThemeName = 'GOLDEN GODDESS';
 
-        function resizeCanvas() {
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = canvas.parentElement.clientHeight;
+        function resizeMainCanvas() {
+            mainCanvas.width = mainCanvas.parentElement.clientWidth;
+            mainCanvas.height = mainCanvas.parentElement.clientHeight;
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        window.addEventListener('resize', resizeMainCanvas);
+        resizeMainCanvas();
 
         class Particle {
-            constructor() {
+            constructor(canvasObj) {
+                this.c = canvasObj;
                 this.reset();
             }
             reset() {
-                this.x = canvas.width / 2 + (Math.random() - 0.5) * 80;
-                this.y = canvas.height / 2 + 50 + (Math.random() - 0.5) * 40;
-                this.size = Math.random() * 4 + 1;
-                this.speedY = -(Math.random() * 3 + 1.5);
-                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.x = this.c.width / 2 + (Math.random() - 0.5) * 80;
+                this.y = this.c.height / 2 + 40 + (Math.random() - 0.5) * 30;
+                this.size = Math.random() * 3.5 + 1;
+                this.speedY = -(Math.random() * 3 + 1.2);
+                this.speedX = (Math.random() - 0.5) * 1.2;
                 this.life = 1;
                 this.decay = Math.random() * 0.02 + 0.01;
             }
@@ -228,12 +283,12 @@
                 this.life -= this.decay;
                 if (this.life <= 0) this.reset();
             }
-            draw() {
+            draw(ctx, color) {
                 ctx.save();
                 ctx.globalAlpha = this.life;
-                ctx.fillStyle = currentColor;
-                ctx.shadowBlur = 12;
-                ctx.shadowColor = currentColor;
+                ctx.fillStyle = color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = color;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -241,39 +296,29 @@
             }
         }
 
-        for (let i = 0; i < 70; i++) particles.push(new Particle());
+        for (let i = 0; i < 60; i++) mainParticles.push(new Particle(mainCanvas));
 
-        function animateVfx() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw simulated character silhouette in center
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
-            ctx.fillRect(canvas.width / 2 - 25, canvas.height / 2 - 40, 50, 90);
+        function animateMain() {
+            mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+            mainCtx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+            mainCtx.fillRect(mainCanvas.width / 2 - 20, mainCanvas.height / 2 - 35, 40, 75);
 
             if (isPlaying) {
-                particles.forEach(p => {
+                mainParticles.forEach(p => {
                     p.update();
-                    p.draw();
+                    p.draw(mainCtx, currentColor);
                 });
             }
-            requestAnimationFrame(animateVfx);
+            requestAnimationFrame(animateMain);
         }
-        animateVfx();
+        animateMain();
 
-        function playVfx() {
-            isPlaying = true;
-            document.getElementById('auraStatus').innerText = `STATUS: ACTIVE (${currentThemeName})`;
-        }
-        function stopVfx() {
-            isPlaying = false;
-            document.getElementById('auraStatus').innerText = `STATUS: STOPPED`;
-        }
+        function playVfx() { isPlaying = true; document.getElementById('auraStatus').innerText = `STATUS: ACTIVE (${currentThemeName})`; }
+        function stopVfx() { isPlaying = false; document.getElementById('auraStatus').innerText = `STATUS: STOPPED`; }
         function setAuraTheme(theme, color) {
             currentColor = color;
             currentThemeName = theme.toUpperCase() + ' GODDESS';
-            if(isPlaying) {
-                document.getElementById('auraStatus').innerText = `STATUS: ACTIVE (${currentThemeName})`;
-            }
+            if(isPlaying) document.getElementById('auraStatus').innerText = `STATUS: ACTIVE (${currentThemeName})`;
         }
     </script>
 </body>
